@@ -3,6 +3,9 @@ import styles from '../styles/Home.module.css'
 import VideoStream from '../components/VideoStream'
 import Advice from '../components/Advice'
 import { useState, useEffect, useRef } from 'react'
+import dotenv from 'dotenv' // Import dotenv
+
+dotenv.config() // Load environment variables
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false)
@@ -17,7 +20,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   async function sendToGemini(message: string): Promise<string> {
-    const apiKey = 'AIzaSyDDZPiXRKGHjGKPFYSv3bFrV_BPG_ZxSeQ'; // <-- Using provided Gemini API key
+    const apiKey = process.env.GEMINI_API_KEY; // Use environment variable for API key
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
     const body = {
       contents: [
